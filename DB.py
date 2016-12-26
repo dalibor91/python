@@ -39,7 +39,7 @@ class DB(object):
 
     @staticmethod
     def run(str, use_normal_cursor=False):
-        crs = if use_normal_cursor DB.cursor() else DB.cursor_dictonary()
+        crs = DB.cursor() if use_normal_cursor else DB.cursor_dictonary()
         crs.execute(str)
         return crs
 
