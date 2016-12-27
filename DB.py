@@ -47,6 +47,19 @@ class DB(object):
     def close():
         DB.instance().close();
         del DB.db_intance
+        
+    @staticmethod
+    def insert(table, columns, values):
+        sql = "INSERT INTO `%s` (%%s) VALUES (%%s);" % table
+        vals = []
+        cols = []
+        for column in columns:
+                vals.append('"%s"')
+                cols.append(column)
+
+        sql = sql % (', '.join(cols), ', '.join(vals))
+
+        DB.run(sql, values)
 
 
 DB.db_host="localhost"
